@@ -1,0 +1,5 @@
+{
+  "git.ignoreLimitWarning": true,
+  "prettier.semi": true,
+  "prettier.singleQuote": false
+}
