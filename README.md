@@ -20,7 +20,7 @@ model. The `longnote` virtual returns the note with the longest string for the
 `body` field.
 
 An example of an instance method is included on the `User` model. This method
-searches queries the `Note` model for the longest note belonging to the user.
+ queries the `Note` model for the longest note belonging to the user.
 
 See `src/server.js` for routes to test the behavior of various queries using
 Postman, curl, or some other http client.
