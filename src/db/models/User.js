@@ -35,5 +35,32 @@ UserSchema.pre("findOneAndUpdate", function() {
   );
 });
 
+UserSchema.virtual("notes", {
+  ref: "Note",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false
+});
+
+UserSchema.virtual("longnote").get(function() {
+  return this.get("notes").sort((a, b) => b.body.length - a.body.length)[0];
+});
+
+UserSchema.methods.longestNote = async function() {
+  const notes = await mongoose.model("Note").find({ user: this._id });
+  if (!notes || notes.length === 0) {
+    return null;
+  }
+  console.log(
+    notes
+      .map(note => ({
+        id: note._id,
+        length: note.body.length
+      }))
+      .sort((a, b) => a.length - b.length)
+  );
+  return notes.sort((a, b) => b.body.length - a.body.length)[0];
+};
+
 /** @name db.User */
 module.exports = mongoose.model("User", UserSchema);
