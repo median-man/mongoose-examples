@@ -32,5 +32,9 @@ NoteSchema.pre("findOneAndUpdate", function() {
   );
 });
 
+NoteSchema.virtual("length").get(function() {
+  return this.body.length;
+});
+
 /** @name db.Note */
 module.exports = mongoose.model("Note", NoteSchema);
